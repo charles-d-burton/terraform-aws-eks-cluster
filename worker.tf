@@ -1,28 +1,3 @@
-resource "aws_iam_role" "demo_node" {
-  name               = "${var.cluster_name}-worker"
-  assume_role_policy = "${data.aws_iam_policy_document.worker_node_policy.json}"
-}
-
-resource "aws_iam_role_policy_attachment" "demo_node_AmazonEKSWorkerNodePolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = "${aws_iam_role.demo_node.name}"
-}
-
-resource "aws_iam_role_policy_attachment" "demo_node_AmazonEKS_CNI_Policy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = "${aws_iam_role.demo_node.name}"
-}
-
-resource "aws_iam_role_policy_attachment" "demo_node_AmazonEC2ContainerRegistryReadOnly" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = "${aws_iam_role.demo_node.name}"
-}
-
-resource "aws_iam_instance_profile" "demo_node" {
-  name = "terraform-eks-demo-worker"
-  role = "${aws_iam_role.demo_node.name}"
-}
-
 resource "aws_security_group" "demo_node" {
   name        = "terraform-eks-demo-node-worker"
   description = "Security group for all nodes in the cluster"
@@ -97,7 +72,7 @@ module "worker_fleet" {
   userdata          = "${local.demo-node-userdata}"
   ami_id            = "${data.aws_ami.eks_worker.id}"
   service_name      = "${var.cluster_name}"
-  subnet_ids        = ["${module.vpc.private_subnets}"]
+  subnet_ids        = ["${module.vpc.public_subnets}"]
 
   instance_policy_arns = [
     "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
@@ -124,25 +99,10 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: ${aws_iam_role.demo_node.arn}
+    - rolearn: ${module.worker_fleet.instance_role}
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
         - system:nodes
 CONFIGMAPAWSAUTH
 }
-
-/* resource "aws_launch_configuration" "demo" {
-  associate_public_ip_address = true
-  iam_instance_profile        = "${aws_iam_instance_profile.demo_node.name}"
-  image_id                    = "${data.aws_ami.eks_worker.id}"
-  instance_type               = "m4.large"
-  name_prefix                 = "terraform-eks-demo"
-  security_groups             = ["${aws_security_group.demo_node.id}"]
-  user_data_base64            = "${base64encode(local.demo-node-userdata)}"
-
-  lifecycle {
-    create_before_destroy = true
-  }
-} */
-

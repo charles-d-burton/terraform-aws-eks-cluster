@@ -9,6 +9,8 @@ resource "aws_spot_fleet_request" "us_east1_fleet" {
   wait_for_fulfillment                = true
   terminate_instances_with_expiration = true
 
+  depends_on = ["aws_iam_role.spot_instance_role", "aws_iam_role.spot_fleet_role"]
+
   //target_groups                       = ["${var.target_groups}"]
 
   #TODO: Figure this out, relationship to other resources is problem
@@ -78,187 +80,187 @@ resource "aws_spot_fleet_request" "us_east1_fleet" {
 
     tags = "${var.tags}"
   }
+
   ######################
   #m5.large
   ######################
   /* launch_specification {
-                instance_type          = "m5.large"
-                ami                    = "${var.ami_id}"
-                key_name               = "${var.key_name}"
-                iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
-                subnet_id              = "${element(var.subnet_ids, 0)}"
-                vpc_security_group_ids = ["${var.security_group_id}"]
+                            instance_type          = "m5.large"
+                            ami                    = "${var.ami_id}"
+                            key_name               = "${var.key_name}"
+                            iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+                            subnet_id              = "${element(var.subnet_ids, 0)}"
+                            vpc_security_group_ids = ["${var.security_group_id}"]
 
-                ebs_block_device = {
-                  volume_type           = "gp2"
-                  volume_size           = "20"
-                  delete_on_termination = "true"
-                  device_name           = "/dev/xvda"
-                }
+                            ebs_block_device = {
+                              volume_type           = "gp2"
+                              volume_size           = "20"
+                              delete_on_termination = "true"
+                              device_name           = "/dev/xvda"
+                            }
 
-                user_data = "${var.userdata}"
+                            user_data = "${var.userdata}"
 
-                tags = "${var.tags}"
-              }
-              launch_specification {
-                instance_type          = "m5.large"
-                ami                    = "${var.ami_id}"
-                key_name               = "${var.key_name}"
-                iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
-                subnet_id              = "${element(var.subnet_ids, 1)}"
-                vpc_security_group_ids = ["${var.security_group_id}"]
+                            tags = "${var.tags}"
+                          }
+                          launch_specification {
+                            instance_type          = "m5.large"
+                            ami                    = "${var.ami_id}"
+                            key_name               = "${var.key_name}"
+                            iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+                            subnet_id              = "${element(var.subnet_ids, 1)}"
+                            vpc_security_group_ids = ["${var.security_group_id}"]
 
-                ebs_block_device = {
-                  volume_type           = "gp2"
-                  volume_size           = "20"
-                  delete_on_termination = "true"
-                  device_name           = "/dev/xvda"
-                }
+                            ebs_block_device = {
+                              volume_type           = "gp2"
+                              volume_size           = "20"
+                              delete_on_termination = "true"
+                              device_name           = "/dev/xvda"
+                            }
 
-                user_data = "${var.userdata}"
+                            user_data = "${var.userdata}"
 
-                tags = "${var.tags}"
-              }
-              launch_specification {
-                instance_type          = "m5.large"
-                ami                    = "${var.ami_id}"
-                key_name               = "${var.key_name}"
-                iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
-                subnet_id              = "${element(var.subnet_ids, 2)}"
-                vpc_security_group_ids = ["${var.security_group_id}"]
+                            tags = "${var.tags}"
+                          }
+                          launch_specification {
+                            instance_type          = "m5.large"
+                            ami                    = "${var.ami_id}"
+                            key_name               = "${var.key_name}"
+                            iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+                            subnet_id              = "${element(var.subnet_ids, 2)}"
+                            vpc_security_group_ids = ["${var.security_group_id}"]
 
-                ebs_block_device = {
-                  volume_type           = "gp2"
-                  volume_size           = "20"
-                  delete_on_termination = "true"
-                  device_name           = "/dev/xvda"
-                }
+                            ebs_block_device = {
+                              volume_type           = "gp2"
+                              volume_size           = "20"
+                              delete_on_termination = "true"
+                              device_name           = "/dev/xvda"
+                            }
 
-                user_data = "${var.userdata}"
+                            user_data = "${var.userdata}"
 
-                tags = "${var.tags}"
-              } */
+                            tags = "${var.tags}"
+                          } */
   ######################
   #c5.large
   ######################
   /* launch_specification {
-              instance_type          = "c5.large"
-              ami                    = "${var.ami_id}"
-              key_name               = "${var.key_name}"
-              iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
-              subnet_id              = "${element(var.subnet_ids, 0)}"
-              vpc_security_group_ids = ["${var.security_group_id}"]
+                          instance_type          = "c5.large"
+                          ami                    = "${var.ami_id}"
+                          key_name               = "${var.key_name}"
+                          iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+                          subnet_id              = "${element(var.subnet_ids, 0)}"
+                          vpc_security_group_ids = ["${var.security_group_id}"]
 
-              ebs_block_device = {
-                volume_type           = "gp2"
-                volume_size           = "20"
-                delete_on_termination = "true"
-                device_name           = "/dev/xvda"
-              }
+                          ebs_block_device = {
+                            volume_type           = "gp2"
+                            volume_size           = "20"
+                            delete_on_termination = "true"
+                            device_name           = "/dev/xvda"
+                          }
 
-              user_data = "${var.userdata}"
+                          user_data = "${var.userdata}"
 
-              tags = "${var.tags}"
-            }
-            launch_specification {
-              instance_type          = "c5.large"
-              ami                    = "${var.ami_id}"
-              key_name               = "${var.key_name}"
-              iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
-              subnet_id              = "${element(var.subnet_ids, 1)}"
-              vpc_security_group_ids = ["${var.security_group_id}"]
+                          tags = "${var.tags}"
+                        }
+                        launch_specification {
+                          instance_type          = "c5.large"
+                          ami                    = "${var.ami_id}"
+                          key_name               = "${var.key_name}"
+                          iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+                          subnet_id              = "${element(var.subnet_ids, 1)}"
+                          vpc_security_group_ids = ["${var.security_group_id}"]
 
-              ebs_block_device = {
-                volume_type           = "gp2"
-                volume_size           = "20"
-                delete_on_termination = "true"
-                device_name           = "/dev/xvda"
-              }
+                          ebs_block_device = {
+                            volume_type           = "gp2"
+                            volume_size           = "20"
+                            delete_on_termination = "true"
+                            device_name           = "/dev/xvda"
+                          }
 
-              user_data = "${var.userdata}"
+                          user_data = "${var.userdata}"
 
-              tags = "${var.tags}"
-            }
-            launch_specification {
-              instance_type          = "c5.large"
-              ami                    = "${var.ami_id}"
-              key_name               = "${var.key_name}"
-              iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
-              subnet_id              = "${element(var.subnet_ids, 2)}"
-              vpc_security_group_ids = ["${var.security_group_id}"]
+                          tags = "${var.tags}"
+                        }
+                        launch_specification {
+                          instance_type          = "c5.large"
+                          ami                    = "${var.ami_id}"
+                          key_name               = "${var.key_name}"
+                          iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+                          subnet_id              = "${element(var.subnet_ids, 2)}"
+                          vpc_security_group_ids = ["${var.security_group_id}"]
 
-              ebs_block_device = {
-                volume_type           = "gp2"
-                volume_size           = "20"
-                delete_on_termination = "true"
-                device_name           = "/dev/xvda"
-              }
+                          ebs_block_device = {
+                            volume_type           = "gp2"
+                            volume_size           = "20"
+                            delete_on_termination = "true"
+                            device_name           = "/dev/xvda"
+                          }
 
-              user_data = "${var.userdata}"
+                          user_data = "${var.userdata}"
 
-              tags = "${var.tags}"
-            } */
+                          tags = "${var.tags}"
+                        } */
   ######################
   #r4.large
   ######################
   /* launch_specification {
-            instance_type          = "r4.large"
-            ami                    = "${var.ami_id}"
-            key_name               = "${var.key_name}"
-            iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
-            subnet_id              = "${element(var.subnet_ids, 0)}"
-            vpc_security_group_ids = ["${var.security_group_id}"]
+                        instance_type          = "r4.large"
+                        ami                    = "${var.ami_id}"
+                        key_name               = "${var.key_name}"
+                        iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+                        subnet_id              = "${element(var.subnet_ids, 0)}"
+                        vpc_security_group_ids = ["${var.security_group_id}"]
 
-            ebs_block_device = {
-              volume_type           = "gp2"
-              volume_size           = "20"
-              delete_on_termination = "true"
-              device_name           = "/dev/xvda"
-            }
+                        ebs_block_device = {
+                          volume_type           = "gp2"
+                          volume_size           = "20"
+                          delete_on_termination = "true"
+                          device_name           = "/dev/xvda"
+                        }
 
-            user_data = "${var.userdata}"
+                        user_data = "${var.userdata}"
 
-            tags = "${var.tags}"
-          }
-          launch_specification {
-            instance_type          = "r4.large"
-            ami                    = "${var.ami_id}"
-            key_name               = "${var.key_name}"
-            iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
-            subnet_id              = "${element(var.subnet_ids, 1)}"
-            vpc_security_group_ids = ["${var.security_group_id}"]
+                        tags = "${var.tags}"
+                      }
+                      launch_specification {
+                        instance_type          = "r4.large"
+                        ami                    = "${var.ami_id}"
+                        key_name               = "${var.key_name}"
+                        iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+                        subnet_id              = "${element(var.subnet_ids, 1)}"
+                        vpc_security_group_ids = ["${var.security_group_id}"]
 
-            ebs_block_device = {
-              volume_type           = "gp2"
-              volume_size           = "20"
-              delete_on_termination = "true"
-              device_name           = "/dev/xvda"
-            }
+                        ebs_block_device = {
+                          volume_type           = "gp2"
+                          volume_size           = "20"
+                          delete_on_termination = "true"
+                          device_name           = "/dev/xvda"
+                        }
 
-            user_data = "${var.userdata}"
+                        user_data = "${var.userdata}"
 
-            tags = "${var.tags}"
-          }
-          launch_specification {
-            instance_type          = "r4.large"
-            ami                    = "${var.ami_id}"
-            key_name               = "${var.key_name}"
-            iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
-            subnet_id              = "${element(var.subnet_ids, 2)}"
-            vpc_security_group_ids = ["${var.security_group_id}"]
+                        tags = "${var.tags}"
+                      }
+                      launch_specification {
+                        instance_type          = "r4.large"
+                        ami                    = "${var.ami_id}"
+                        key_name               = "${var.key_name}"
+                        iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+                        subnet_id              = "${element(var.subnet_ids, 2)}"
+                        vpc_security_group_ids = ["${var.security_group_id}"]
 
-            ebs_block_device = {
-              volume_type           = "gp2"
-              volume_size           = "20"
-              delete_on_termination = "true"
-              device_name           = "/dev/xvda"
-            }
+                        ebs_block_device = {
+                          volume_type           = "gp2"
+                          volume_size           = "20"
+                          delete_on_termination = "true"
+                          device_name           = "/dev/xvda"
+                        }
 
-            user_data = "${var.userdata}"
+                        user_data = "${var.userdata}"
 
-            tags = "${var.tags}"
-          } */
-  depends_on = ["aws_iam_role.spot_instance_role", "aws_iam_role.spot_fleet_role"]
+                        tags = "${var.tags}"
+                      } */
 }
 
 /* 
