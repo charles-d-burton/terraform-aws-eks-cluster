@@ -19,12 +19,12 @@ resource "aws_iam_role_policy_attachment" "demo_node_AmazonEC2ContainerRegistryR
 }
 
 resource "aws_iam_instance_profile" "demo_node" {
-  name = "terraform-eks-demo"
+  name = "terraform-eks-demo-worker"
   role = "${aws_iam_role.demo_node.name}"
 }
 
 resource "aws_security_group" "demo_node" {
-  name        = "terraform-eks-demo-node"
+  name        = "terraform-eks-demo-node-worker"
   description = "Security group for all nodes in the cluster"
   vpc_id      = "${module.vpc.vpc_id}"
 

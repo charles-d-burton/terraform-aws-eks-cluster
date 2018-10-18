@@ -5,13 +5,13 @@ resource "aws_iam_instance_profile" "instance_profile" {
 }
 
 resource "aws_iam_role" "spot_fleet_role" {
-  name = "${var.service_name}-${var.region}"
+  name = "${var.service_name}-${var.region}-fleet"
 
   assume_role_policy = "${data.aws_iam_policy_document.spot_fleet_role_policy.json}"
 }
 
 resource "aws_iam_role" "spot_instance_role" {
-  name = "${var.service_name}-${var.region}"
+  name = "${var.service_name}-${var.region}-instance"
 
   assume_role_policy = "${data.aws_iam_policy_document.spot_instance_role_policy.json}"
 }
