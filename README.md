@@ -51,3 +51,11 @@ $ kubectl get-nodes --watch
 ```
 
 And you should see the worker nodes joining the cluster.
+
+#Cleaning Up
+The EKS master node is pretty expensive so I recommend not running it all the time unless you have a lot of cash to burn.  When you're finished experimenting simply run:
+```bash
+$ terraform destroy
+```
+
+This will delete and cleanup all the resources created by this project.
