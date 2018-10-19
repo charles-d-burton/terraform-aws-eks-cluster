@@ -7,14 +7,21 @@ This project is designed to be an example of standing up an EKS Cluster from scr
 * Terraform Version 0.11.8 installed
 * AWS Account
 * kubectl installed
+  * https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
 * aws-iam-authenticator plugin for kubectl installed
+  * https://github.com/kubernetes-sigs/aws-iam-authenticator
 * Terraform user created in account with Admin permissions
+  * Ensure that you have your API tokens set correctly in $HOME/.aws/credentials
 * S3 Bucket created for storing state
 * Dynamodb table created for locking state
+  * If you do not need to lock your terraform run you can remove this from the backend
 
 ### Configuration
 
-Ensure that you modify the backend block in terraform to work with your environment.
+Ensure that you modify the backend block in terraform to work with your environment.  This is the first terraform block located at
+```bash
+./config.tf
+```
 
 This project is a kitchen sink project.  It have every component required for standing up an EKS Cluster, it includes:
 * Creating a VPC with:
