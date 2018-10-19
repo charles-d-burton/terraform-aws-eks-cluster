@@ -52,6 +52,7 @@ resource "aws_eks_cluster" "demo" {
 
 locals {
   kubeconfig = <<KUBECONFIG
+  
 apiVersion: v1
 clusters:
 - cluster:

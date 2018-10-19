@@ -21,13 +21,12 @@ resource "aws_spot_fleet_request" "us_east1_fleet" {
   #t3.nano
   ######################
   launch_specification {
-    instance_type               = "t3.nano"
-    ami                         = "${var.ami_id}"
-    key_name                    = "${var.key_name}"
-    iam_instance_profile        = "${aws_iam_instance_profile.instance_profile.name}"
-    subnet_id                   = "${element(var.subnet_ids, 0)}"
-    vpc_security_group_ids      = ["${var.security_group_id}"]
-    associate_public_ip_address = true
+    instance_type          = "t3.nano"
+    ami                    = "${var.ami_id}"
+    key_name               = "${var.key_name}"
+    iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+    subnet_id              = "${element(var.subnet_ids, 0)}"
+    vpc_security_group_ids = ["${var.security_group_id}"]
 
     ebs_block_device = {
       volume_type           = "gp2"
@@ -41,13 +40,12 @@ resource "aws_spot_fleet_request" "us_east1_fleet" {
     tags = "${var.tags}"
   }
   launch_specification {
-    instance_type               = "t3.nano"
-    ami                         = "${var.ami_id}"
-    key_name                    = "${var.key_name}"
-    iam_instance_profile        = "${aws_iam_instance_profile.instance_profile.name}"
-    subnet_id                   = "${element(var.subnet_ids, 1)}"
-    vpc_security_group_ids      = ["${var.security_group_id}"]
-    associate_public_ip_address = true
+    instance_type          = "t3.nano"
+    ami                    = "${var.ami_id}"
+    key_name               = "${var.key_name}"
+    iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+    subnet_id              = "${element(var.subnet_ids, 1)}"
+    vpc_security_group_ids = ["${var.security_group_id}"]
 
     ebs_block_device = {
       volume_type           = "gp2"
@@ -61,13 +59,12 @@ resource "aws_spot_fleet_request" "us_east1_fleet" {
     tags = "${var.tags}"
   }
   launch_specification {
-    instance_type               = "t3.nano"
-    ami                         = "${var.ami_id}"
-    key_name                    = "${var.key_name}"
-    iam_instance_profile        = "${aws_iam_instance_profile.instance_profile.name}"
-    subnet_id                   = "${element(var.subnet_ids, 2)}"
-    vpc_security_group_ids      = ["${var.security_group_id}"]
-    associate_public_ip_address = true
+    instance_type          = "t3.nano"
+    ami                    = "${var.ami_id}"
+    key_name               = "${var.key_name}"
+    iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.name}"
+    subnet_id              = "${element(var.subnet_ids, 2)}"
+    vpc_security_group_ids = ["${var.security_group_id}"]
 
     ebs_block_device = {
       volume_type           = "gp2"

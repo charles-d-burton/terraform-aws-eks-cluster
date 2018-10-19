@@ -90,6 +90,7 @@ module "worker_fleet" {
 
 locals {
   config-map-aws-auth = <<CONFIGMAPAWSAUTH
+  
 apiVersion: v1
 kind: ConfigMap
 metadata:
