@@ -63,9 +63,9 @@ USERDATA
 
 module "worker_fleet" {
   source            = "./spot_fleet"
-  fleet_size        = 2
-  region            = "us-east-1"
-  key_name          = "test"
+  fleet_size        = "${var.fleet_size}"
+  region            = "${var.region}"
+  key_name          = "${var.key_name}"
   security_group_id = "${aws_security_group.demo_node.id}"
   env               = "test"
   vpc_id            = "${module.vpc.vpc_id}"
@@ -90,7 +90,7 @@ module "worker_fleet" {
 
 locals {
   config-map-aws-auth = <<CONFIGMAPAWSAUTH
-  
+
 apiVersion: v1
 kind: ConfigMap
 metadata:

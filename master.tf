@@ -1,5 +1,5 @@
 resource "aws_iam_role" "demo_cluster" {
-  name               = "cluster_name"
+  name               = "${var.cluster_name}"
   assume_role_policy = "${data.aws_iam_policy_document.master_policy.json}"
 }
 
@@ -52,7 +52,7 @@ resource "aws_eks_cluster" "demo" {
 
 locals {
   kubeconfig = <<KUBECONFIG
-  
+
 apiVersion: v1
 clusters:
 - cluster:

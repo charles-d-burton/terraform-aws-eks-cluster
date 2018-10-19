@@ -6,11 +6,15 @@ This project is designed to be an example of standing up an EKS Cluster from scr
 ### Pre-requisites
 * Terraform Version 0.11.8 installed
 * AWS Account
+* kubectl installed
+* aws-iam-authenticator plugin for kubectl installed
 * Terraform user created in account with Admin permissions
 * S3 Bucket created for storing state
 * Dynamodb table created for locking state
 
 ### Configuration
+
+Ensure that you modify the backend block in terraform to work with your environment.
 
 This project is a kitchen sink project.  It have every component required for standing up an EKS Cluster, it includes:
 * Creating a VPC with:

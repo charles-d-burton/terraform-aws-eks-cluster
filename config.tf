@@ -1,14 +1,14 @@
 terraform {
   backend "s3" {
     bucket         = "rs-terraform-state"
-    key            = "us-east-1/test/eks"
+    key            = "eks/test-cluster"
     region         = "us-east-1"
     dynamodb_table = "rs-state-lock"
   }
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = "${var.region}"
 }
 
 data "aws_region" "current" {}
